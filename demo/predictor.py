@@ -10,6 +10,10 @@ from maskrcnn_benchmark.modeling.roi_heads.mask_head.inference import Masker
 from maskrcnn_benchmark import layers as L
 from maskrcnn_benchmark.utils import cv2_util
 
+from tools.bn_fusion import fuse_bn_recursively
+from tools.mobilercnn_to_lightnet import writeSixDNet_base
+from tools.mobilercnn_to_lightnet import writeMobileRCNN_det
+from tools.mobilercnn_to_lightnet import writeMobileRCNN_mask
 
 class COCODemo(object):
     # COCO categories for pretty print
@@ -115,6 +119,11 @@ class COCODemo(object):
         save_dir = cfg.OUTPUT_DIR
         checkpointer = DetectronCheckpointer(cfg, self.model, save_dir=save_dir)
         _ = checkpointer.load(cfg.MODEL.WEIGHT)
+
+        self.model = fuse_bn_recursively(self.model)
+
+        writeSixDNet_base(self.model, "/home/viprad/Documents/Models/sixdnet/0.1/SixDNet_base.txt",
+                          "/home/viprad/Documents/Models/sixdnet/0.1/SixDNet_base.bin", False)
 
         self.transforms = self.build_transform()
 
