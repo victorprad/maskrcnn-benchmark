@@ -12,8 +12,8 @@ from maskrcnn_benchmark.utils import cv2_util
 
 from tools.bn_fusion import fuse_bn_recursively
 from tools.mobilercnn_to_lightnet import writeSixDNet_base
-from tools.mobilercnn_to_lightnet import writeMobileRCNN_det
-from tools.mobilercnn_to_lightnet import writeMobileRCNN_mask
+from tools.mobilercnn_to_lightnet import writeSixDNet_det
+from tools.mobilercnn_to_lightnet import writeSixDNet_mask
 
 class COCODemo(object):
     # COCO categories for pretty print
@@ -124,6 +124,12 @@ class COCODemo(object):
 
         writeSixDNet_base(self.model, "/home/viprad/Documents/Models/sixdnet/0.1/SixDNet_base.txt",
                           "/home/viprad/Documents/Models/sixdnet/0.1/SixDNet_base.bin", False)
+
+        writeSixDNet_det(self.model, "/home/viprad/Documents/Models/sixdnet/0.1/SixDNet_det.txt",
+                         "/home/viprad/Documents/Models/sixdnet/0.1/SixDNet_det.bin", False)
+
+        writeSixDNet_mask(self.model, "/home/viprad/Documents/Models/sixdnet/0.1/SixDNet_mask.txt",
+                          "/home/viprad/Documents/Models/sixdnet/0.1/SixDNet_mask.bin", False)
 
         self.transforms = self.build_transform()
 

@@ -337,6 +337,20 @@ class PytorchToLightNet:
         return name
 
     @staticmethod
+    def writeAvgPoolFromParams(scope, name, kernel_size, stride, padding, ceil_mode, parent_name, lntxt):
+        remove_extra = 1
+        if ceil_mode:
+            remove_extra = 0
+
+        lntxt.write("POOLING {} size: {} {} method: avg stride: {} {} pad: {} {} {} {} remove_extra: {}\n".format(
+            name, kernel_size, kernel_size, stride, stride,
+            padding, padding, padding, padding, remove_extra))
+        lntxt.write("\tscope {}\n".format(scope))
+        lntxt.write("\tinput from 1: {}\n".format(parent_name))
+
+        return name
+
+    @staticmethod
     def writeUpSampleNearest(upsample, scope, name, ratio, rect, parent_name, lntxt):
         lntxt.write("UPSAMPLE {} upsample: {} {} rect: {} {} method: nearest\n".format(
             name, ratio[0], ratio[1], rect[0], rect[1]))
