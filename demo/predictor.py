@@ -11,9 +11,9 @@ from maskrcnn_benchmark import layers as L
 from maskrcnn_benchmark.utils import cv2_util
 
 from tools.bn_fusion import fuse_bn_recursively
-from tools.mobilercnn_to_lightnet import writeSixDNet_base
-from tools.mobilercnn_to_lightnet import writeSixDNet_det
-from tools.mobilercnn_to_lightnet import writeSixDNet_mask
+from tools.sixdnet_to_lightnet import writeSixDNet_base
+from tools.sixdnet_to_lightnet import writeSixDNet_det
+from tools.sixdnet_to_lightnet import writeSixDNet_mask
 
 class COCODemo(object):
     # COCO categories for pretty print
